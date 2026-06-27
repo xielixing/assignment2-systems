@@ -78,7 +78,7 @@ def _test_DistributedDataParallel(rank: int, world_size: int, model_class: type[
     # overall pool of data.
     # Shape: (20, 10)
     all_x = torch.load(FIXTURES_PATH / "ddp_test_data.pt")
-    # Shape: (20, 5)
+    # Shape: (20, 10)
     all_y = torch.load(FIXTURES_PATH / "ddp_test_labels.pt")
 
     # Each rank will see only 10 examples (out of the total dataset size of 20)

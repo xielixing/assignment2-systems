@@ -37,7 +37,7 @@ class ToyModel(nn.Module):
         super().__init__()
         self.fc1 = nn.Linear(10, 10, bias=False)
         self.fc2 = _FC2()
-        self.fc3 = nn.Linear(50, 5, bias=False)
+        self.fc3 = nn.Linear(50, 10, bias=False)
         self.relu = nn.ReLU()
         self.no_grad_fixed_param = nn.Parameter(torch.tensor([2.0, 2.0]), requires_grad=False)
 
@@ -55,7 +55,7 @@ class ToyModelWithTiedWeights(nn.Module):
         self.fc2 = nn.Linear(10, 50, bias=False)
         self.fc3 = nn.Linear(50, 10, bias=False)
         self.fc4 = nn.Linear(10, 50, bias=False)
-        self.fc5 = nn.Linear(50, 5, bias=False)
+        self.fc5 = nn.Linear(50, 10, bias=False)
         self.fc4.weight = self.fc2.weight
         self.relu = nn.ReLU()
 

@@ -100,7 +100,7 @@ wheels = [
 
 [[package]]
 name = "cs336-basics"
-version = "26.0.0"
+version = "26.0.4"
 source = { editable = "cs336-basics" }
 dependencies = [
     { name = "einops", marker = "sys_platform == 'linux'" },
@@ -139,7 +139,7 @@ requires-dist = [
 
 [[package]]
 name = "cs336-systems"
-version = "26.1.0"
+version = "26.1.4"
 source = { editable = "." }
 dependencies = [
     { name = "cs336-basics", marker = "sys_platform == 'linux'" },

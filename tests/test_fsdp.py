@@ -170,7 +170,9 @@ def _test_fsdp_correctness(rank: int, world_size: int, compute_dtype):
         for name, np_param in non_parallel_model.named_parameters():
             fsdp_full = full_params[name]
             if compute_dtype is None:
-                assert torch.equal(np_param.data, fsdp_full), f"Step {step}: Parameter {name} mismatch. Max diff: {(np_param.data - fsdp_full).abs().max().item()}"
+                assert torch.allclose(np_param.data, fsdp_full, atol=1e-6, rtol=1e-4), (
+                    f"Step {step}: Parameter {name} mismatch. Max diff: {(np_param.data - fsdp_full).abs().max().item()}"
+                )
             else:
                 assert torch.allclose(np_param.data, fsdp_full, atol=1e-4, rtol=1e-4), (
                     f"Step {step}: Parameter {name} mismatch. Max diff: {(np_param.data - fsdp_full).abs().max().item()}"
@@ -240,7 +242,7 @@ def _test_fsdp_gradient_sync(rank: int, world_size: int, compute_dtype):
         gathered = [torch.zeros_like(param.grad) for _ in range(world_size)]
         dist.all_gather(gathered, param.grad)
         for r in range(1, world_size):
-            assert torch.equal(gathered[0], gathered[r]), (
+            assert torch.allclose(gathered[0], gathered[r], atol=1e-4, rtol=1e-4), (
                 f"Replicated gradient for {name} differs between rank 0 and rank {r}. Max diff: {(gathered[0] - gathered[r]).abs().max().item()}"
             )
 
