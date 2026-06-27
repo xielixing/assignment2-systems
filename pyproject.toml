@@ -11,7 +11,8 @@ dependencies = [
     "numpy",
     "pytest>=8",
     "regex>=2026.3.32",
-    "torch~=2.11.0",
+    "torch==2.5.1+cu121",
+    "triton==3.6.0; python_version >= '3.13'",
     "tqdm>=4.67.1",
     "wandb>=0.19.7",
     "pandas>=2",
@@ -30,9 +31,21 @@ module-root = ""
 [tool.uv]
 package = true
 python-preference = "managed"
+environments = ["sys_platform == 'linux'"]
 
 [tool.uv.sources]
 cs336-basics = { path = "./cs336-basics", editable = true } # Change this path to your assignment1-basics repo you want to use your own implementation!
+torch = { index = "pytorch-cu121" }
+
+[[tool.uv.index]]
+name = "pypi-tuna"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
 
 
 
