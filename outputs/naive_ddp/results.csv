@@ -1,0 +1,2 @@
+backend,world_size,model_size,context_length,global_batch_size,local_batch_size,precision,warmup_steps,measurement_steps,max_rank_mean_total_ms,max_rank_mean_comm_ms,communication_fraction
+nccl,2,xl,512,4,2,fp32,2,5,1070.724853515625,60.75355453491211,0.05674058497421956
